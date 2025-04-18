@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('obats', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_obat');     // diperbaiki dari jenis_obat
+            $table->integer('jumlah')->nullable();  // nullable sesuai input controller
+            $table->string('jenis')->nullable();    // jenis obat
+            $table->string('kemasan');
+            $table->decimal('harga', 10, 2);        // kolom harga ditambahkan
             $table->timestamps();
         });
     }

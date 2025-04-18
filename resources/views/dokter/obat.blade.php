@@ -2,134 +2,105 @@
 
 @section('title', content:'Obat')
 
-@section(section:'content')
+@section('content')
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">Obat</h1>
-          </div><!-- /.col -->
+          </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home Dokter</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Data Obat</li>
             </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
+          </div>
+        </div>
+      </div>
     </div>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        Obat
+
+        {{-- Form Tambah Obat --}}
         <div class="row">
             <div class="col-md-6">
-                <!-- general form elements -->
                 <div class="card card-primary">
                   <div class="card-header">
                     <h3 class="card-title">Form Tambah Obat</h3>
                   </div>
-                  <!-- /.card-header -->
-                  <!-- form start -->
-                  <form>
+
+                  <form action="{{ route('obat.store') }}" method="POST">
+                    @csrf
                     <div class="card-body">
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="nama_obat">Nama Obat</label>
+                        <input type="text" class="form-control" name="nama_obat" id="nama_obat" placeholder="Masukkan nama obat">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="jumlah">Jumlah</label>
+                        <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Masukkan jumlah">
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        <label for="jenis">Jenis</label>
+                        <input type="text" class="form-control" name="jenis" id="jenis" placeholder="Masukkan jenis obat">
                       </div>
-
+                      <div class="form-group">
+                        <label for="kemasan">Kemasan</label>
+                        <input type="text" class="form-control" name="kemasan" id="kemasan" placeholder="Masukkan kemasan">
+                      </div>
+                      <div class="form-group">
+                        <label for="harga">Harga</label>
+                        <input type="number" class="form-control" name="harga" id="harga" placeholder="Masukkan harga">
+                      </div>
                     </div>
-                    <!-- /.card-body -->
-    
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                   </form>
                 </div>
-                <!-- /.card -->
+            </div>
         </div>
-      </div>
+
+        {{-- Table Data Obat --}}
         <div class="row">
             <div class="col-12">
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Responsive Hover Table</h3>
-    
-                    <div class="card-tools">
-                      <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-    
-                        <div class="input-group-append">
-                          <button type="submit" class="btn btn-default">
-                            <i class="fas fa-search"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    <h3 class="card-title">Data Obat</h3>
                   </div>
-                  <!-- /.card-header -->
                   <div class="card-body table-responsive p-0">
                     <table class="table table-hover text-nowrap">
                       <thead>
                         <tr>
                           <th>ID</th>
-                          <th>User</th>
-                          <th>Date</th>
-                          <th>Status</th>
-                          <th>Reason</th>
+                          <th>Nama</th>
+                          <th>Jumlah</th>
+                          <th>Jenis</th>
+                          <th>Kemasan</th>
+                          <th>Harga</th>
                         </tr>
                       </thead>
                       <tbody>
+                        @foreach($obats as $obat)
                         <tr>
-                          <td>183</td>
-                          <td>John Doe</td>
-                          <td>11-7-2014</td>
-                          <td><span class="tag tag-success">Approved</span></td>
-                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                          <td>{{ $obat->id }}</td>
+                          <td>{{ $obat->nama_obat }}</td>
+                          <td>{{ $obat->jumlah }}</td>
+                          <td>{{ $obat->jenis }}</td>
+                          <td>{{ $obat->kemasan }}</td>
+                          <td>{{ $obat->harga }}</td>
                         </tr>
-                        <tr>
-                          <td>219</td>
-                          <td>Alexander Pierce</td>
-                          <td>11-7-2014</td>
-                          <td><span class="tag tag-warning">Pending</span></td>
-                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                          <td>657</td>
-                          <td>Bob Doe</td>
-                          <td>11-7-2014</td>
-                          <td><span class="tag tag-primary">Approved</span></td>
-                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
-                        <tr>
-                          <td>175</td>
-                          <td>Mike Doe</td>
-                          <td>11-7-2014</td>
-                          <td><span class="tag tag-danger">Denied</span></td>
-                          <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        </tr>
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
-                  <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
-              </div>
+            </div>
         </div>
-      <!-- /.container-fluid -->
+
+      </div>
     </section>
-    <!-- /.content -->
-  </div>
+</div>
 @endsection
